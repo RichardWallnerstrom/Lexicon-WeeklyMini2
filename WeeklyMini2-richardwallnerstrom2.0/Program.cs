@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Globalization;
+using System.Collections.Generic; //List<T>
+using System.Globalization; //CultureInfo.InvariantCulture
+using System.Linq;
 using CC = System.ConsoleColor;
 
 class Product
@@ -19,16 +19,21 @@ class Product
     public static void AddProduct(List<Product> products)
     {
         Program.Print("Please type in desired category: ");
-        string category = Console.ReadLine();
+        string category = Console.ReadLine().Trim();
         Program.Print("Please type in product name: ");
-        string name = Console.ReadLine();
+        string name = Console.ReadLine().Trim();
         Program.Print("Please type in price: ");
-        string priceInput = Console.ReadLine();
+        string priceInput = Console.ReadLine().Trim().Replace(',', '.');
+        if (string.IsNullOrWhiteSpace(category) || string.IsNullOrWhiteSpace(name))
+        {
+            Program.PrintLine("Category and name cannot be empty.", CC.White, CC.DarkRed);
+            Program.PrintLine("---------------------------------------", CC.DarkBlue);
+            return;
+        }
 
         //Make sure price accepts both period and comma to seperate the decimals 
-        priceInput = priceInput.Replace(',', '.');
         double price;
-        //Enforce regional system to allow period in decimal numbers 
+        //Convert and Enforce regional system to allow period in decimal numbers 
         if (double.TryParse(priceInput, NumberStyles.Any, CultureInfo.InvariantCulture, out price))
         {
             products.Add(new Product(category, name, price));
@@ -50,7 +55,7 @@ class Product
         Program.PrintLine("---------------------------------------", CC.DarkBlue);
         Program.PrintLine($"{"Category",-10}{"Name",-10} Price", CC.DarkGreen);
         Program.PrintLine("---------------------------------------", CC.DarkBlue);
-        products = products.OrderBy(x => x.Price).ToList(); 
+        products = products.OrderBy(x => x.Price).ThenBy(x => x.Category).ThenBy(x => x.Name).ToList(); 
         foreach (var product in products)
         {
             Program.PrintLine($"{product.Category,-10}{product.Name,-10}{product.Price}");
