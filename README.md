@@ -1,0 +1,1 @@
+# Lexicon-WeeklyMini2
