@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using CC = System.ConsoleColor;
@@ -24,7 +25,7 @@ class Product
         Program.Print("Please type in price: ");
         string priceInput = Console.ReadLine();
 
-        //Make sure price accepts both period and comma to seperate the decimals
+        //Make sure price accepts both period and comma to seperate the decimals 
         priceInput = priceInput.Replace(',', '.');
         double price;
         //Enforce regional system to allow period in decimal numbers 
@@ -49,7 +50,7 @@ class Product
         Program.PrintLine("---------------------------------------", CC.DarkBlue);
         Program.PrintLine($"{"Category",-10}{"Name",-10} Price", CC.DarkGreen);
         Program.PrintLine("---------------------------------------", CC.DarkBlue);
-
+        products = products.OrderBy(x => x.Price).ToList(); 
         foreach (var product in products)
         {
             Program.PrintLine($"{product.Category,-10}{product.Name,-10}{product.Price}");
@@ -124,8 +125,8 @@ class Program
 
     static void Main()
     {
-        PrintWelcome();
         List<Product> products = new List<Product>();
+        PrintWelcome();
         while (true)
         {
             PrintLegend();
