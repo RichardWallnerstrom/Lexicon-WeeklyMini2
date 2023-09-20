@@ -27,7 +27,7 @@ class Product
         //Make sure price accepts both period and comma to seperate the decimals
         priceInput = priceInput.Replace(',', '.');
         double price;
-        //Enforce regional system to allow period   
+        //Enforce regional system to allow period in decimal numbers 
         if (double.TryParse(priceInput, NumberStyles.Any, CultureInfo.InvariantCulture, out price))
         {
             products.Add(new Product(category, name, price));
