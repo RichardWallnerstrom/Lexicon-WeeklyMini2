@@ -1,16 +1,22 @@
 # Lexicon-WeeklyMini2
 1. Project Overview
+   
 Simple project for school. Can add products to a list and search for them.
 
 2. Installation Instructions
+   
 Requires .net 6.0 to run. 
+
 3. Usage Guide
+   
 Type a letter to choose function. 
+
 4. Configuration
+   
 No app configuration possible atm. 
-5. Contributing Guidelines
-Detail how others can contribute to your project. Include information about issues, pull requests, and coding standards.
-6. License
+
+
+5. License
 
    This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
